@@ -1,0 +1,22 @@
+###
+#   Database Settings
+###
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/
+    platform: postgres
+    username: postgres
+    password: docker
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+
+server:
+  port: 8080
