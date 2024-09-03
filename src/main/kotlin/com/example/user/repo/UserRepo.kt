@@ -10,6 +10,6 @@ import java.math.BigInteger
 @Repository
 interface UserRepo : JpaRepository<Person, BigInteger> {
 
-    //@Override
+    @Override
     fun findPeopleByAddress(address: Address) : List<Person>
 }
