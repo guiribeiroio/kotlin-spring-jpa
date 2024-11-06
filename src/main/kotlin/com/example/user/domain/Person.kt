@@ -8,7 +8,10 @@ import javax.persistence.*
 
 @Entity
 @Builder
-data class Person(@Id var id: BigInteger, @Temporal(TemporalType.DATE) var deleted : Date?) {
+data class Person(
+        @Id var id: BigInteger, 
+        @Temporal(TemporalType.DATE) var deleted : Date?
+    ) {
 
     @OneToMany(cascade = [CascadeType.MERGE, CascadeType.PERSIST])
     var address: MutableList<Address> = arrayListOf()

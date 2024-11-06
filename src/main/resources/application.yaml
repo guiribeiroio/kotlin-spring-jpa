@@ -3,7 +3,7 @@
 ###
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/
+    url: jdbc:postgresql://localhost:5432/
     platform: postgres
     username: postgres
     password: docker

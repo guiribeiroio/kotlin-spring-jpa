@@ -20,8 +20,7 @@ import java.math.BigInteger
 @ActiveProfiles("test")
 class UserRepoTest {
 
-
-    private val logger = LoggerFactory.getLogger(javaClass)
+    private val LOGGER = LoggerFactory.getLogger(javaClass)
 
     @Autowired
     lateinit var repository: UserRepo
@@ -31,6 +30,7 @@ class UserRepoTest {
     @Before
     fun setUp(){
         stubPerson =  Person(id = BigInteger.ONE, deleted = null, address = Address( AddressPK("5","PPTHH3"),"Rd 2"))
+        LOGGER.debug(stubPerson.toString())
     }
 
     @Test
