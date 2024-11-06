@@ -11,6 +11,7 @@ import com.example.user.repo.EmailRepo
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,15 +24,9 @@ import javax.transaction.Transactional
 @RestController
 @Transactional
 @CrossOrigin(origins = ["http://localhost:3000"])
-class UserResource {
+class UserResource(@Autowired var userRepo: UserRepo, @Autowired var emailRepo: EmailRepo) {
 
-    @Autowired
-    lateinit var userRepo: UserRepo
-
-    @Autowired
-    lateinit var emailRepo: EmailRepo
-
-    val mapper = jacksonObjectMapper()
+    private val mapper = jacksonObjectMapper()
 
     @GetMapping("/personCreate")
     fun all(): MutableList<Person> {
@@ -66,13 +61,13 @@ class UserResource {
     }
 
     @GetMapping("/email")
-    fun emailSubscribe(): List<Email> {
+    fun listEmailSubscribed(): List<Email> {
         return emailRepo.findAll()
     }
 
     @PostMapping("/email")
-    fun emailSubscribe(@RequestBody email : String): Email {
+    fun subscribeEmail(@RequestBody email : String): ResponseEntity<Email> {
         val emailDto: EmailDto = mapper.readValue<EmailDto>(email)
-        return emailRepo.save(Email(email = emailDto.email))
+        return ResponseEntity.ok(emailRepo.save(Email(email = emailDto.email)))
     }
 }
